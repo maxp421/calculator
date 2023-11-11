@@ -1,0 +1,131 @@
+* {
+  outline: 2px solid limegreen;
+}
+/* RESET
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+/*
+  2. Remove default margin
+*/
+* {
+  margin: 0;
+}
+/*
+  Typographic tweaks!
+  3. Add accessible line-height
+  4. Improve text rendering
+*/
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+/*
+  5. Improve media defaults
+*/
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+/*
+  6. Remove built-in form typography styles
+*/
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+/*
+  7. Avoid text overflows
+*/
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+/*
+  8. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+/*End of reset*/
+body{
+  font-size: 18px;
+  font-family: system-ui, sans-serif;
+}
+
+.calculator {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  margin-inline: auto;
+  padding: 1.5em;
+  width: 96vw;
+  gap: 1.5em;
+  border-radius: 9px;
+  background-color: #005B8C;
+}
+
+.display {
+  height: 20vh;
+  background-color: #3F5034;
+  border-radius: 9px;
+  font-size: 50px;
+  font-family: Seven Segment, sans-serif;
+  font-weight: 700;
+  padding: 0.4em;
+  overflow: hidden;
+}
+
+.btns-grid {
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  height: 60vh;
+}
+.btn {
+  font-weight: 900;
+  border-radius: 9px;
+  background-color: #005687;
+  color: #FEFFFF;
+}
+.btn-plus {
+  grid-row-start: 4;
+  grid-row-end: 6;
+  grid-column-start: 4;
+  grid-column-end: 5;
+}
+
+/* Footer */
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 50px;
+}
+
+.fa-github {
+  transition: 0.3s ease-in;
+}
+.fa-github:hover {
+  scale: 130%;
+  transform: translateY(-4px);
+}
