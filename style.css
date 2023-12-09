@@ -1,6 +1,3 @@
-* {
-  outline: 2px solid limegreen;
-}
 /* RESET
   1. Use a more-intuitive box-sizing model.
 */
@@ -64,50 +61,104 @@ h6 {
   isolation: isolate;
 }
 /*End of reset*/
-body{
-  font-size: 18px;
+
+::selection {
+  color: rgba(71, 238, 109, 1);
+  background: rgba(71, 238, 109, 0.2);
+}
+
+header {
+  padding-block: 1.5em;
+  text-align: center;
+}
+
+body {
+  font-size: 20px;
   font-family: system-ui, sans-serif;
+  color: white;
+  background-image: url("images/black-smooth-textured-paper-background-web.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
 }
 
 .calculator {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 1.5em;
+  background: rgba(255, 255, 255, 0.2);
+  background: transparent;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
 
   margin-inline: auto;
   padding: 1.5em;
-  width: 96vw;
-  gap: 1.5em;
+  border: 1px solid rgba(71, 238, 109, 0.05);
   border-radius: 9px;
-  background-color: #005B8C;
+  min-width: 350px;
+  max-width: 400px;
+  height: 700px;
+  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.8));
 }
 
 .display {
-  height: 20vh;
-  background-color: #3F5034;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+  border: 1px solid black;
   border-radius: 9px;
-  font-size: 50px;
-  font-family: Seven Segment, sans-serif;
+  padding-block: 0.4em;
+  padding-inline: 1em;
+  height: 180px;
+  white-space: normal;
+  box-shadow: 0px 0px 3px 3px rgba(71, 238, 109, 1);
+}
+
+.displayed-data {
+  max-width: 270px;
+  font-size: 26px;
+  font-family:
+    Seven Segment,
+    sans-serif;
   font-weight: 700;
-  padding: 0.4em;
-  overflow: hidden;
+  color: rgba(71, 238, 109, 1);
 }
 
 .btns-grid {
   display: grid;
-  gap: 0.5em;
+  flex-grow: 1;
+  gap: 1em;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  height: 60vh;
 }
 .btn {
   font-weight: 900;
-  border-radius: 9px;
-  background-color: #005687;
-  color: #FEFFFF;
+  border-radius: 4px;
+  color: #47ee6d;
+  background-color: transparent;
+  /* background-color: #1d1d1d; */
+  /* border: 4px solid #47ee6d; */
+  border: none;
+  transition: 0.15s;
+  cursor: pointer;
+}
+.btn--green {
+  box-shadow: 0px 0px 3px 3px rgba(71, 238, 109, 1);
+}
+
+.btn--green:hover {
+  box-shadow: 0px 0px 3px 5px rgba(71, 238, 109, 1);
+}
+.btn--green:active {
+  box-shadow: 0px 0px 5px 7px rgba(71, 238, 109, 1);
+}
+.btn--green--active {
+  box-shadow: 0px 0px 5px 7px rgba(71, 238, 109, 1);
 }
 .btn-plus {
-  grid-row-start: 4;
-  grid-row-end: 6;
+  grid-row-start: 5;
+  grid-row-end: 7;
   grid-column-start: 4;
   grid-column-end: 5;
 }

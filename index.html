@@ -1,6 +1,5 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,8 +10,10 @@
       src="https://kit.fontawesome.com/069b7249c1.js"
       crossorigin="anonymous"
     ></script>
-    <link href="https://fonts.cdnfonts.com/css/seven-segment" rel="stylesheet">
-
+    <link
+      href="https://fonts.cdnfonts.com/css/seven-segment"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -21,27 +22,89 @@
     </header>
     <main>
       <div class="calculator">
-        <div class="display">125.55 + 128</div>
+        <div class="display">
+          <p id="inputString" class="displayed-data"></p>
+          <p id="outputString" class="displayed-data">result</p>
+        </div>
         <div class="btns-grid">
-          <button class="btn">CE</button>
-          <button class="btn">%</button>
-          <button class="btn">%</button>
-          <button class="btn">%</button>
-          <button class="btn">7</button>
-          <button class="btn">8</button>
-          <button class="btn">9</button>
-          <button class="btn">*</button>
-          <button class="btn">4</button>
-          <button class="btn">5</button>
-          <button class="btn">6</button>
-          <button class="btn">-</button>
-          <button class="btn">1</button>
-          <button class="btn">2</button>
-          <button class="btn">3</button>
-          <button class="btn btn-plus">+</button>
-          <button class="btn">0</button>
-          <button class="btn">.</button>
-          <button class="btn">=</button>
+          <button
+            class="btn btn--green"
+            data-key="Backspace"
+            data-operation="deleteCharacter"
+          >
+            ⬅
+          </button>
+          <!-- clears one digit -->
+          <!-- clears just one entry -->
+          <button class="btn btn--green" data-key="Delete">C</button>
+          <!-- clears everything -->
+          <button class="btn btn--green" data-character="^" data-key="^">
+            n^x
+          </button>
+          <button class="btn btn--green" data-character="%" data-key="%">
+            mod
+          </button>
+          <!-- <button class="btn btn--green" data-character="" data-key=""></button> -->
+          <!-- <button class="btn btn--green" data-character="" data-key=""></button> -->
+          <button class="btn btn--green" data-character="(" data-key="(">
+            (
+          </button>
+          <button class="btn btn--green" data-character=")" data-key=")">
+            )
+          </button>
+          <button class="btn btn--green" data-character="√" data-key="√">
+            x√n
+          </button>
+          <button class="btn btn--green" data-character="/" data-key="/">
+            /
+          </button>
+          <button class="btn btn--green" data-character="7" data-key="7">
+            7
+          </button>
+          <button class="btn btn--green" data-character="8" data-key="8">
+            8
+          </button>
+          <button class="btn btn--green" data-character="9" data-key="9">
+            9
+          </button>
+          <button class="btn btn--green" data-character="*" data-key="*">
+            *
+          </button>
+          <button class="btn btn--green" data-character="4" data-key="4">
+            4
+          </button>
+          <button class="btn btn--green" data-character="5" data-key="5">
+            5
+          </button>
+          <button class="btn btn--green" data-character="6" data-key="6">
+            6
+          </button>
+          <button class="btn btn--green" data-character="-" data-key="-">
+            -
+          </button>
+          <button class="btn btn--green" data-character="1" data-key="1">
+            1
+          </button>
+          <button class="btn btn--green" data-character="2" data-key="2">
+            2
+          </button>
+          <button class="btn btn--green" data-character="3" data-key="3">
+            3
+          </button>
+          <button
+            class="btn btn--green btn-plus"
+            data-character="+"
+            data-key="+"
+          >
+            +
+          </button>
+          <button class="btn btn--green" data-character="0" data-key="0">
+            0
+          </button>
+          <button class="btn btn--green" data-character="." data-key=".">
+            .
+          </button>
+          <button class="btn btn--green" data-key="Enter">=</button>
         </div>
       </div>
     </main>
@@ -51,7 +114,7 @@
       <a href="https://github.com/maxp421/" target="_blank">
         <i
           class="fa-brands fa-github fa-xl"
-          style="color: #f02eaa"
+          style="color: #47ee6d"
           aria-hidden="true"
         ></i>
       </a>
