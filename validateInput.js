@@ -33,6 +33,7 @@ export function validateParentheses(str) {
 
   function validateParenthesesOrder() {
     const parentheses = str.match(/[()]/g);
+    if (parentheses === null) return true;
     let parenthesesStack = 0;
     for (const char of parentheses) {
       if (char === "(") parenthesesStack++;

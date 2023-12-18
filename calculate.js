@@ -27,18 +27,25 @@ export function calculate(str) {
   if (validateParentheses(str) !== true) return validateParentheses(str);
 
   while (str.match(/\(/)) {
+    console.log(str);
     const innermostParentheses = getInnermostParentheses(str);
-    const result = evaluateTokens(
-      tokenizeString(
-        str.slice(innermostParentheses.start, innermostParentheses.end),
-      ),
-    );
+    const result = evaluateTokens(tokenizeString(innermostParentheses));
     // str.splice(innermostParentheses.start, innermostParentheses.end, result); //
     //https://stackoverflow.com/questions/20817618/is-there-a-splice-method-for-strings
+    //
+    //edge case - when final string is surrounded with parenthesis
     const splitStr = str.split("(" + innermostParentheses + ")");
+    //if result of parentheses contents starts with minus and there was a plus before the parentheses
+    //we need to check before merging the splits and remove the +;
+    //also shit like 15*-9 think about how to deal with that (potentially make all minuses
+    // a part of the number, making the number negative? the whole three token strat needs
+      // to be changed)
+    if(result[0] === -)
     str = splitStr[0] + result + splitStr[1];
   }
+  str = evaluateTokens(tokenizeString(str));
   //look for most nested parenthesis loop and slowly chip away at string until result.
+  return str;
 }
 
 function tokenizeString(str) {
@@ -59,24 +66,54 @@ function getInnermostParentheses(str) {
 }
 
 function evaluateTokens(tokens) {
-  const operators = {
-    "-": false,
-    "+": false,
-    "*": false,
-    "/": false,
-    "^": false,
-    "√": false,
-    "%": false,
-  };
-  function operatorIndex(tokens) {
-    //could optimize this by stopping the search of operator types after
-    //an operator type returns -1
-    if (tokens.indexOf("^") !== -1) {
-      return;
-    }
+  const operators = [
+    { operator: "^", isExhausted: false },
+    { operator: "√", isExhausted: false },
+    { operator: "/", isExhausted: false },
+    { operator: "*", isExhausted: false },
+    { operator: "%", isExhausted: false },
+    { operator: "+", isExhausted: false },
+    { operator: "-", isExhausted: false },
+  ];
+  function getResult([token1, operator, token2]) {
+    token1 = +token1;
+    token2 = +token2;
+    if (operator === "^") return Math.pow(token1, token2);
+    if (operator === "√") return Math.pow(token2, 1 / token1); //imprecise, write
+    //custom function like https://cwestblog.com/2011/05/06/cube-root-an-beyond/
+    if (operator === "*") return token1 * token2;
+    if (operator === "/") return token1 / token2;
+    if (operator === "%") return token1 % token2;
+    //mention in readme and below the calc that modulo comes after */, to avoid
+    //confusion use parentheses
+    if (operator === "+") return token1 + token2;
+    if (operator === "-") return token1 - token2;
   }
+
   while (tokens.length !== 1) {
-    const operator = operatorIndex(tokens);
+    for (const entry of operators) {
+      if (entry.isExhausted) continue;
+
+      const operatorIndex = tokens.indexOf(entry.operator);
+
+      if (operatorIndex === -1) {
+        entry.isExhausted = true;
+        continue;
+      }
+      const operationTokens = tokens.slice(
+        operatorIndex - 1,
+        operatorIndex + 2,
+      );
+      console.log("operationTokens", operationTokens);
+      tokens.splice(
+        operatorIndex - 1,
+        operatorIndex + 2,
+        getResult(operationTokens),
+      );
+      console.log(tokens);
+      break;
+    }
+    return tokens.toString();
 
     //    calculate and modify token array;
     //can't divide by 0
@@ -86,7 +123,7 @@ function evaluateTokens(tokens) {
   }
 }
 
-console.log(
-  tokenizeString(getInnermostParentheses("15+23-(23*5-(23-4+((-15-9)-23)))")),
-);
-console.log("-15+24-15*52/25".match(/(\d+|[-+*/^√%])/g));
+console.log(calculate("15+23-(23*5-(23-4+((-15-9)-23)))"));
+// console.log(getInnermostParentheses("15+23-(23*5-(23-4+((-15-9)-23)))"));
+//ADD FLOATING POINT NUMBERS!!!
+// console.log(calculate("15+23"));
