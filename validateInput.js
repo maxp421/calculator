@@ -9,18 +9,11 @@
 //
 //
 //Fix naming - parenthesis - singular parentheses - plural
-function calculateString(str) {
-  return;
-}
-function validateInput(str) {
-  validateParentheses(str);
-  validateExpression(str);
-}
 
 // TODO TERAZ - pridat vsetky operatory - mod, mocnina odmocnina, este raz prejst
 // vsetky edge cases na validity checkoch
 
-function validateParentheses(str) {
+export function validateParentheses(str) {
   //Validity tests:
   //there has to be an operator before opening parenthesis unless:
   //  parenthesis are the first item in the string
@@ -28,7 +21,7 @@ function validateParentheses(str) {
   //if ) comes before a (, false
   //if ( lacks a pair, false
   //if ) lacks a pair, false
-  function operatorBeforeParenthesis() {
+  function hasOperatorBeforeParenthesis() {
     const trimmedStr = str.slice(1, str.length);
     //opening paranthesis ( added to list of operators in case of nested parenthesis
     const noOperatorBeforeParenthesis = trimmedStr.match(/(?<![-+*/^√%(])\(/g);
@@ -37,35 +30,37 @@ function validateParentheses(str) {
     }
     return true;
   }
-  function arePaired() {
+
+  function validateParenthesesOrder() {
     const parentheses = str.match(/[()]/g);
-    let opening = 0;
-    let closing = 0;
-    for (const item of parentheses) {
-      if (item === "(") opening++;
-      else if (item === ")") {
-        if (opening - closing === 0) return "unpaired closing parenthesis";
-        closing++;
+    let parenthesesStack = 0;
+    for (const char of parentheses) {
+      if (char === "(") parenthesesStack++;
+      else if (char === ")") {
+        if (parenthesesStack === 0) return "unpaired closing parenthesis";
+        parenthesesStack--;
       }
     }
-    return opening - closing === 0 ? true : "unpaired opening paranthesis";
+    return parenthesesStack === 0 ? true : "unpaired opening paranthesis";
   }
 
-  if (operatorBeforeParenthesis() !== true) return operatorBeforeParenthesis();
-  if (arePaired !== true) return arePaired();
+  const operatorResult = hasOperatorBeforeParenthesis();
+  if (operatorResult !== true) operatorResult;
+  const validatedOrderResult = validateParenthesesOrder();
+  if (validatedOrderResult !== true) return validatedOrderResult;
   return true;
 }
 
-//check validity of string, no paranthesis
-function validateExpression(str) {
-  // Used to validate a math expression with no parenthesis. Need a
-  // separate method to validate the entire string with parenthesis for things
-  // like if string starts with a -( or just () etc. and a suitable name for both
-  if (str.match(/^[^-\d]/)) {
-    return "must start with a digit or -";
+//check validity of string, no parenthesis
+export function validateExpression(str) {
+  // Used to validate a math expression, doesn't take inner paranthesis into account
+  // thus has to be called on the contents of parentheses that are inside the expression
+  // separately
+  if (str.match(/^[^-\d(]/)) {
+    return "must start with a -, (, or a digit";
   }
   if (str.match(/[^\d)]$/)) {
-    return "must end with a digit";
+    return "must end with a digit or )";
   }
   if (str.match(/([-+*/^√%]){2,}/)) {
     return "2 or more subsequent operators";
@@ -73,24 +68,19 @@ function validateExpression(str) {
   return true;
 }
 
-function parseString(str) {
-  const elements = [];
-  return;
-  //returns array [num1, operator, num2, operator, num3, operator]
-  //etc.
-  //in terms of parenthesis,
-}
-//can't divide by 0
-//
 function testsxD() {
   console.log(validateExpression("15+12√11"));
   console.log(validateExpression("15+12+11"));
+  console.log(
+    "parenthesis at start and end",
+    validateExpression("(15+26-(28*3))"),
+  );
   console.log(validateParentheses("15+(25 - 4)(15 - 7)"));
-  console.log(validateParentheses(")+("));
+  console.log("arepaired", validateParentheses(")+("));
   console.log(validateParentheses(")+()+("));
   console.log(
     "parenthesis inside parenthesis",
     validateParentheses("15+((257)-(15+5))"),
   );
 }
-calculateString();
+testsxD();

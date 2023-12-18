@@ -1,3 +1,5 @@
+import { calculate } from "./calculate.js";
+
 const btnsGrid = document.querySelector(".btns-grid");
 const btns = btnsGrid.children;
 const inputString = document.querySelector("#inputString");
@@ -25,7 +27,7 @@ const keyOperations = {
     return "";
   },
   Enter: function (inputString) {
-    outputString.textContent = inputString;
+    outputString.textContent = calculate(inputString);
     enter = true;
     return inputString;
   },
