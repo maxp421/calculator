@@ -1,18 +1,4 @@
 "use strict";
-//Function which takes string and returns result.
-//Inside it's going to call other functions to break this process down into steps
-//1. We break the string down into numbers and operators, and fill an array with the results
-//0,1,2,3,4... from left to right.
-//2. we loop through the array and look for */, then take neighboring array element numbers
-//and use operator to calculate their result. once that is done we replace the num1, num2 and operator
-//with result and shrink array.
-//
-//
-//Fix naming - parenthesis - singular parentheses - plural
-
-// TODO TERAZ - pridat vsetky operatory - mod, mocnina odmocnina, este raz prejst
-// vsetky edge cases na validity checkoch
-
 export function validateParentheses(str) {
   //Validity tests:
   //there has to be an operator before opening parenthesis unless:
@@ -31,6 +17,11 @@ export function validateParentheses(str) {
     return true;
   }
 
+  function hasNoEmptyParentheses() {
+    if (str.match(/\(\)/)) return "empty parentheses";
+    return true;
+  }
+
   function validateParenthesesOrder() {
     const parentheses = str.match(/[()]/g);
     if (parentheses === null) return true;
@@ -44,7 +35,8 @@ export function validateParentheses(str) {
     }
     return parenthesesStack === 0 ? true : "unpaired opening paranthesis";
   }
-
+  const emptyParenthesesResult = hasNoEmptyParentheses();
+  if (emptyParenthesesResult !== true) return emptyParenthesesResult;
   const operatorResult = hasOperatorBeforeParenthesis();
   if (operatorResult !== true) operatorResult;
   const validatedOrderResult = validateParenthesesOrder();
@@ -81,7 +73,8 @@ function testsxD() {
   console.log(validateParentheses(")+()+("));
   console.log(
     "parenthesis inside parenthesis",
-    validateParentheses("15+((257)-(15+5))"),
+    validateExpression("15+((257)-(15+5))"),
   );
+  console.log("parentheses", validateParentheses("125/2*4()"));
 }
 testsxD();

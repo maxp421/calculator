@@ -12,12 +12,9 @@ document.documentElement.addEventListener("keydown", (e) => {
   keyboardInput(e);
 });
 
-//Need to classify keys which are just textcontent = inputString and which have special functions
-//
 //= should work on key = and enter. If there are multiple keys used on one
 //button we need a list with key + operation pairs, multiple keys having same
 //operation?
-//clearEntry should work on key delete
 
 const keyOperations = {
   Backspace: function (inputString) {
@@ -38,13 +35,11 @@ function buttonClick(e) {
     return;
   }
 
-  console.log(e.target.dataset);
   userInput(e.target.dataset.key);
 }
 
 function keyboardInput(e) {
   //Add '=' as enter alternative.
-  console.log(e);
   for (const btn of btns) {
     if (btn.dataset.key === e.key) {
       userInput(e.key);
@@ -79,5 +74,8 @@ function userInput(key) {
       if (btn.dataset.key === key)
         inputString.textContent += btn.dataset.character;
     }
+  }
+  if (isFinite(calculate(inputString.textContent))) {
+    outputString.textContent = calculate(inputString.textContent);
   }
 }

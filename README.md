@@ -9,3 +9,11 @@ input relatively safely as this project is running clientside. Another solution 
 A better alternative would be using a library such as [mathjs](https://mathjs.org/) which [should](https://mathjs.org/docs/expressions/security.html) be safer.
 
 The solution I chose was to parse the string myself using RegEx as I have been meaning to learn RegEx for a while now and this project seemed like a great excuse to do so.
+
+Order of operations:
+
+1.  Parantheses
+2.  Exponentiation
+3.  Multiplication and Division
+4.  Modulo
+5.  Addition and Subtraction
