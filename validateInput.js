@@ -1,13 +1,12 @@
 "use strict";
 export function validateParentheses(str) {
-  //Validity tests:
-  //there has to be an operator before opening parenthesis unless:
-  //  parenthesis are the first item in the string
-  //  nested paranthesis ((15-1)+25)
-  //if ) comes before a (, false
-  //if ( lacks a pair, false
-  //if ) lacks a pair, false
   function hasOperatorBeforeParenthesis() {
+    //there has to be an operator before opening parenthesis unless:
+    //  parenthesis are the first item in the string
+    //  nested paranthesis ((15-1)+25)
+    //if ) comes before a (, false
+    //if ( lacks a pair, false
+    //if ) lacks a pair, false
     const trimmedStr = str.slice(1, str.length);
     //opening paranthesis ( added to list of operators in case of nested parenthesis
     const noOperatorBeforeParenthesis = trimmedStr.match(/(?<![-+*/^√%(])\(/g);
@@ -44,7 +43,6 @@ export function validateParentheses(str) {
   return true;
 }
 
-//check validity of string, no parenthesis
 export function validateExpression(str) {
   // Used to validate a math expression, doesn't take inner paranthesis into account
   // thus has to be called on the contents of parentheses that are inside the expression
@@ -60,21 +58,3 @@ export function validateExpression(str) {
   }
   return true;
 }
-
-function testsxD() {
-  console.log(validateExpression("15+12√11"));
-  console.log(validateExpression("15+12+11"));
-  console.log(
-    "parenthesis at start and end",
-    validateExpression("(15+26-(28*3))"),
-  );
-  console.log(validateParentheses("15+(25 - 4)(15 - 7)"));
-  console.log("arepaired", validateParentheses(")+("));
-  console.log(validateParentheses(")+()+("));
-  console.log(
-    "parenthesis inside parenthesis",
-    validateExpression("15+((257)-(15+5))"),
-  );
-  console.log("parentheses", validateParentheses("125/2*4()"));
-}
-testsxD();
