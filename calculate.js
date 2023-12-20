@@ -86,8 +86,3 @@ function evaluateTokens(tokens) {
   }
   return tokens.toString();
 }
-// console.log(calculate("15+23-(23*5-(23-4+((-15-9)-23)))", "expected: -105"));
-// console.log(calculate("-(-15+5)"), "expected: 10"); //'results in operationTokens - [-, 'undefined]'
-// console.log(calculate("-(-1/5+5)"), "expected: 10"); //'results in operationTokens - [-, 'undefined]'
-// console.log(calculate("15/0"));
-// console.log(calculate("7.5%2"));
