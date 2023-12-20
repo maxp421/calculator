@@ -1,7 +1,7 @@
 # Calculator
 
 [The Odin Project](https://www.theodinproject.com/lessons/foundations-calculator) Calculator app built with JS, HTML, CSS  
-[Live preview 👌]()
+[Live preview 👌](https://maxp421.github.io/calculator/)
 
 This project diverts from The Odin Project assignment, instead of evaluating pairs of expressions
 I decided to evaluate an entire string of inputs at once, allowing the use of paranthesis and exponentiation. According to my research this could be done using `eval()` with a filtered
