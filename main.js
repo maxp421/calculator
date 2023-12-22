@@ -12,10 +12,6 @@ document.documentElement.addEventListener("keydown", (e) => {
   keyboardInput(e);
 });
 
-//= should work on key = and enter. If there are multiple keys used on one
-//button we need a list with key + operation pairs, multiple keys having same
-//operation?
-
 const keyOperations = {
   Backspace: function (inputString) {
     return (inputString = inputString.slice(0, inputString.length - 1));
@@ -37,12 +33,11 @@ function buttonClick(e) {
 
   userInput(e.target.dataset.key);
 }
-
 function keyboardInput(e) {
   //Add '=' as enter alternative.
   for (const btn of btns) {
-    if (btn.dataset.key === e.key) {
-      userInput(e.key);
+    if (btn.dataset.key === e.key || btn.dataset.altkey === e.key) {
+      userInput(btn.dataset.key);
       btn.classList.add("btn--green--active");
       setTimeout(() => {
         btn.classList.remove("btn--green--active");
